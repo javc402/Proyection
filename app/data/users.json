@@ -1,0 +1,152 @@
+[
+  {
+    "email": "admin@proyection.com",
+    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "firstName": "Administrador",
+    "lastName": "Sistema",
+    "phone": "+57 300 123 4567",
+    "dateOfBirth": "1990-01-15",
+    "country": "Colombia",
+    "currency": "COP",
+    "language": "es",
+    "timezone": "America/Bogota",
+    "role": "admin",
+    "isActive": true,
+    "isEmailVerified": true,
+    "preferences": {
+      "theme": "light",
+      "notifications": {
+        "email": true,
+        "push": true,
+        "sms": false
+      },
+      "dashboard": {
+        "defaultView": "overview",
+        "showBalance": true,
+        "chartType": "bar"
+      }
+    },
+    "createdAt": "2025-08-27T18:00:00.000Z",
+    "updatedAt": "2025-08-27T18:00:00.000Z"
+  },
+  {
+    "email": "juan.perez@gmail.com",
+    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "firstName": "Juan",
+    "lastName": "Pérez",
+    "phone": "+57 301 234 5678",
+    "dateOfBirth": "1985-03-22",
+    "country": "Colombia",
+    "currency": "COP",
+    "language": "es",
+    "timezone": "America/Bogota",
+    "role": "user",
+    "isActive": true,
+    "isEmailVerified": true,
+    "preferences": {
+      "theme": "dark",
+      "notifications": {
+        "email": true,
+        "push": true,
+        "sms": true
+      },
+      "dashboard": {
+        "defaultView": "investments",
+        "showBalance": true,
+        "chartType": "line"
+      }
+    },
+    "createdAt": "2025-08-27T18:00:00.000Z",
+    "updatedAt": "2025-08-27T18:00:00.000Z"
+  },
+  {
+    "email": "maria.garcia@hotmail.com",
+    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "firstName": "María",
+    "lastName": "García",
+    "phone": "+57 302 345 6789",
+    "dateOfBirth": "1992-07-10",
+    "country": "Colombia",
+    "currency": "USD",
+    "language": "es",
+    "timezone": "America/Bogota",
+    "role": "user",
+    "isActive": true,
+    "isEmailVerified": false,
+    "preferences": {
+      "theme": "light",
+      "notifications": {
+        "email": true,
+        "push": false,
+        "sms": false
+      },
+      "dashboard": {
+        "defaultView": "expenses",
+        "showBalance": false,
+        "chartType": "pie"
+      }
+    },
+    "createdAt": "2025-08-27T18:00:00.000Z",
+    "updatedAt": "2025-08-27T18:00:00.000Z"
+  },
+  {
+    "email": "carlos.rodriguez@yahoo.com",
+    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "firstName": "Carlos",
+    "lastName": "Rodríguez",
+    "phone": "+1 555 123 4567",
+    "dateOfBirth": "1988-11-05",
+    "country": "United States",
+    "currency": "USD",
+    "language": "en",
+    "timezone": "America/New_York",
+    "role": "user",
+    "isActive": true,
+    "isEmailVerified": true,
+    "preferences": {
+      "theme": "dark",
+      "notifications": {
+        "email": true,
+        "push": true,
+        "sms": true
+      },
+      "dashboard": {
+        "defaultView": "overview",
+        "showBalance": true,
+        "chartType": "bar"
+      }
+    },
+    "createdAt": "2025-08-27T18:00:00.000Z",
+    "updatedAt": "2025-08-27T18:00:00.000Z"
+  },
+  {
+    "email": "ana.martinez@outlook.com",
+    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "firstName": "Ana",
+    "lastName": "Martínez",
+    "phone": "+34 612 345 678",
+    "dateOfBirth": "1995-09-18",
+    "country": "Spain",
+    "currency": "EUR",
+    "language": "es",
+    "timezone": "Europe/Madrid",
+    "role": "user",
+    "isActive": false,
+    "isEmailVerified": true,
+    "preferences": {
+      "theme": "light",
+      "notifications": {
+        "email": false,
+        "push": false,
+        "sms": false
+      },
+      "dashboard": {
+        "defaultView": "savings",
+        "showBalance": true,
+        "chartType": "area"
+      }
+    },
+    "createdAt": "2025-08-27T18:00:00.000Z",
+    "updatedAt": "2025-08-27T18:00:00.000Z"
+  }
+]

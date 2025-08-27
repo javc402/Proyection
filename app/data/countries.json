@@ -1,0 +1,379 @@
+[
+  {
+    "name": "Colombia",
+    "nativeName": "Colombia",
+    "isoCode": "CO",
+    "iso3Code": "COL",
+    "numericCode": "170",
+    "flag": "https://flagcdn.com/w320/co.png",
+    "flagEmoji": "🇨🇴",
+    "continent": "SA",
+    "region": "South America",
+    "subregion": "South America",
+    "currency": {
+      "code": "COP",
+      "name": "Colombian Peso",
+      "symbol": "$"
+    },
+    "capital": "Bogotá",
+    "callingCode": "+57",
+    "topLevelDomain": ".co",
+    "timezones": ["UTC-05:00"],
+    "languages": [
+      {
+        "code": "ES",
+        "name": "Spanish",
+        "nativeName": "Español"
+      }
+    ],
+    "isActive": true,
+    "isSupported": true,
+    "displayOrder": 1
+  },
+  {
+    "name": "United States",
+    "nativeName": "United States",
+    "isoCode": "US",
+    "iso3Code": "USA",
+    "numericCode": "840",
+    "flag": "https://flagcdn.com/w320/us.png",
+    "flagEmoji": "🇺🇸",
+    "continent": "NA",
+    "region": "North America",
+    "subregion": "Northern America",
+    "currency": {
+      "code": "USD",
+      "name": "United States Dollar",
+      "symbol": "$"
+    },
+    "capital": "Washington, D.C.",
+    "callingCode": "+1",
+    "topLevelDomain": ".us",
+    "timezones": [
+      "UTC-12:00",
+      "UTC-11:00",
+      "UTC-10:00",
+      "UTC-09:00",
+      "UTC-08:00",
+      "UTC-07:00",
+      "UTC-06:00",
+      "UTC-05:00",
+      "UTC-04:00",
+      "UTC+10:00",
+      "UTC+12:00"
+    ],
+    "languages": [
+      {
+        "code": "EN",
+        "name": "English",
+        "nativeName": "English"
+      }
+    ],
+    "isActive": true,
+    "isSupported": true,
+    "displayOrder": 2
+  },
+  {
+    "name": "Spain",
+    "nativeName": "España",
+    "isoCode": "ES",
+    "iso3Code": "ESP",
+    "numericCode": "724",
+    "flag": "https://flagcdn.com/w320/es.png",
+    "flagEmoji": "🇪🇸",
+    "continent": "EU",
+    "region": "Europe",
+    "subregion": "Southern Europe",
+    "currency": {
+      "code": "EUR",
+      "name": "Euro",
+      "symbol": "€"
+    },
+    "capital": "Madrid",
+    "callingCode": "+34",
+    "topLevelDomain": ".es",
+    "timezones": [
+      "UTC",
+      "UTC+01:00"
+    ],
+    "languages": [
+      {
+        "code": "ES",
+        "name": "Spanish",
+        "nativeName": "Español"
+      },
+      {
+        "code": "CA",
+        "name": "Catalan",
+        "nativeName": "Català"
+      },
+      {
+        "code": "EU",
+        "name": "Basque",
+        "nativeName": "Euskera"
+      },
+      {
+        "code": "GL",
+        "name": "Galician",
+        "nativeName": "Galego"
+      }
+    ],
+    "isActive": true,
+    "isSupported": true,
+    "displayOrder": 3
+  },
+  {
+    "name": "Mexico",
+    "nativeName": "México",
+    "isoCode": "MX",
+    "iso3Code": "MEX",
+    "numericCode": "484",
+    "flag": "https://flagcdn.com/w320/mx.png",
+    "flagEmoji": "🇲🇽",
+    "continent": "NA",
+    "region": "North America",
+    "subregion": "Central America",
+    "currency": {
+      "code": "MXN",
+      "name": "Mexican Peso",
+      "symbol": "$"
+    },
+    "capital": "Mexico City",
+    "callingCode": "+52",
+    "topLevelDomain": ".mx",
+    "timezones": [
+      "UTC-08:00",
+      "UTC-07:00",
+      "UTC-06:00"
+    ],
+    "languages": [
+      {
+        "code": "ES",
+        "name": "Spanish",
+        "nativeName": "Español"
+      }
+    ],
+    "isActive": true,
+    "isSupported": false,
+    "displayOrder": 4
+  },
+  {
+    "name": "Argentina",
+    "nativeName": "Argentina",
+    "isoCode": "AR",
+    "iso3Code": "ARG",
+    "numericCode": "032",
+    "flag": "https://flagcdn.com/w320/ar.png",
+    "flagEmoji": "🇦🇷",
+    "continent": "SA",
+    "region": "South America",
+    "subregion": "South America",
+    "currency": {
+      "code": "ARS",
+      "name": "Argentine Peso",
+      "symbol": "$"
+    },
+    "capital": "Buenos Aires",
+    "callingCode": "+54",
+    "topLevelDomain": ".ar",
+    "timezones": ["UTC-03:00"],
+    "languages": [
+      {
+        "code": "ES",
+        "name": "Spanish",
+        "nativeName": "Español"
+      }
+    ],
+    "isActive": true,
+    "isSupported": false,
+    "displayOrder": 5
+  },
+  {
+    "name": "Peru",
+    "nativeName": "Perú",
+    "isoCode": "PE",
+    "iso3Code": "PER",
+    "numericCode": "604",
+    "flag": "https://flagcdn.com/w320/pe.png",
+    "flagEmoji": "🇵🇪",
+    "continent": "SA",
+    "region": "South America",
+    "subregion": "South America",
+    "currency": {
+      "code": "PEN",
+      "name": "Peruvian Sol",
+      "symbol": "S/."
+    },
+    "capital": "Lima",
+    "callingCode": "+51",
+    "topLevelDomain": ".pe",
+    "timezones": ["UTC-05:00"],
+    "languages": [
+      {
+        "code": "ES",
+        "name": "Spanish",
+        "nativeName": "Español"
+      },
+      {
+        "code": "QU",
+        "name": "Quechua",
+        "nativeName": "Runa Simi"
+      }
+    ],
+    "isActive": true,
+    "isSupported": false,
+    "displayOrder": 6
+  },
+  {
+    "name": "Chile",
+    "nativeName": "Chile",
+    "isoCode": "CL",
+    "iso3Code": "CHL",
+    "numericCode": "152",
+    "flag": "https://flagcdn.com/w320/cl.png",
+    "flagEmoji": "🇨🇱",
+    "continent": "SA",
+    "region": "South America",
+    "subregion": "South America",
+    "currency": {
+      "code": "CLP",
+      "name": "Chilean Peso",
+      "symbol": "$"
+    },
+    "capital": "Santiago",
+    "callingCode": "+56",
+    "topLevelDomain": ".cl",
+    "timezones": [
+      "UTC-06:00",
+      "UTC-04:00"
+    ],
+    "languages": [
+      {
+        "code": "ES",
+        "name": "Spanish",
+        "nativeName": "Español"
+      }
+    ],
+    "isActive": true,
+    "isSupported": false,
+    "displayOrder": 7
+  },
+  {
+    "name": "Canada",
+    "nativeName": "Canada",
+    "isoCode": "CA",
+    "iso3Code": "CAN",
+    "numericCode": "124",
+    "flag": "https://flagcdn.com/w320/ca.png",
+    "flagEmoji": "🇨🇦",
+    "continent": "NA",
+    "region": "North America",
+    "subregion": "Northern America",
+    "currency": {
+      "code": "CAD",
+      "name": "Canadian Dollar",
+      "symbol": "$"
+    },
+    "capital": "Ottawa",
+    "callingCode": "+1",
+    "topLevelDomain": ".ca",
+    "timezones": [
+      "UTC-08:00",
+      "UTC-07:00",
+      "UTC-06:00",
+      "UTC-05:00",
+      "UTC-04:00",
+      "UTC-03:30"
+    ],
+    "languages": [
+      {
+        "code": "EN",
+        "name": "English",
+        "nativeName": "English"
+      },
+      {
+        "code": "FR",
+        "name": "French",
+        "nativeName": "Français"
+      }
+    ],
+    "isActive": true,
+    "isSupported": false,
+    "displayOrder": 8
+  },
+  {
+    "name": "United Kingdom",
+    "nativeName": "United Kingdom",
+    "isoCode": "GB",
+    "iso3Code": "GBR",
+    "numericCode": "826",
+    "flag": "https://flagcdn.com/w320/gb.png",
+    "flagEmoji": "🇬🇧",
+    "continent": "EU",
+    "region": "Europe",
+    "subregion": "Northern Europe",
+    "currency": {
+      "code": "GBP",
+      "name": "British Pound Sterling",
+      "symbol": "£"
+    },
+    "capital": "London",
+    "callingCode": "+44",
+    "topLevelDomain": ".uk",
+    "timezones": ["UTC"],
+    "languages": [
+      {
+        "code": "EN",
+        "name": "English",
+        "nativeName": "English"
+      }
+    ],
+    "isActive": true,
+    "isSupported": false,
+    "displayOrder": 9
+  },
+  {
+    "name": "France",
+    "nativeName": "France",
+    "isoCode": "FR",
+    "iso3Code": "FRA",
+    "numericCode": "250",
+    "flag": "https://flagcdn.com/w320/fr.png",
+    "flagEmoji": "🇫🇷",
+    "continent": "EU",
+    "region": "Europe",
+    "subregion": "Western Europe",
+    "currency": {
+      "code": "EUR",
+      "name": "Euro",
+      "symbol": "€"
+    },
+    "capital": "Paris",
+    "callingCode": "+33",
+    "topLevelDomain": ".fr",
+    "timezones": [
+      "UTC-10:00",
+      "UTC-09:30",
+      "UTC-09:00",
+      "UTC-08:00",
+      "UTC-04:00",
+      "UTC-03:00",
+      "UTC+01:00",
+      "UTC+03:00",
+      "UTC+04:00",
+      "UTC+05:00",
+      "UTC+11:00",
+      "UTC+12:00"
+    ],
+    "languages": [
+      {
+        "code": "FR",
+        "name": "French",
+        "nativeName": "Français"
+      }
+    ],
+    "isActive": true,
+    "isSupported": false,
+    "displayOrder": 10
+  }
+]

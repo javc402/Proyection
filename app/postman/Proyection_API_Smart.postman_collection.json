@@ -1,0 +1,682 @@
+{
+  "info": {
+    "name": "🌐 Proyection API",
+    "description": "API para gestión financiera personal con auto-autenticación inteligente",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// 🔧 SCRIPT DE AUTO-AUTENTICACIÓN INTELIGENTE",
+          "// Se ejecuta automáticamente antes de cada request",
+          "",
+          "// 🚫 Saltar auto-login para el endpoint de login",
+          "const isLoginRequest = pm.request.url.path && pm.request.url.path.includes('login');",
+          "if (isLoginRequest) {",
+          "    console.log('🚪 Endpoint de login - saltando auto-autenticación');",
+          "    return;",
+          "}",
+          "",
+          "// 🔄 FUNCIÓN PARA OBTENER TOKEN AUTOMÁTICAMENTE",
+          "function obtenerTokenAutomatico() {",
+          "    const currentToken = pm.collectionVariables.get('authToken');",
+          "    ",
+          "    if (currentToken && currentToken !== '') {",
+          "        try {",
+          "            const tokenParts = currentToken.split('.');",
+          "            if (tokenParts.length === 3) {",
+          "                const payload = JSON.parse(atob(tokenParts[1]));",
+          "                const now = Math.floor(Date.now() / 1000);",
+          "                ",
+          "                if (payload.exp && payload.exp > (now + 120)) {",
+          "                    const minutosRestantes = Math.floor((payload.exp - now) / 60);",
+          "                    console.log('🎫 Token válido por ' + minutosRestantes + ' minutos más');",
+          "                    return;",
+          "                }",
+          "            }",
+          "        } catch (e) {",
+          "            console.log('🔍 Token inválido, obteniendo uno nuevo...');",
+          "        }",
+          "    }",
+          "    ",
+          "    console.log('🔄 Obteniendo token fresco...');",
+          "    ",
+          "    const loginRequest = {",
+          "        url: pm.collectionVariables.get('baseUrl') + '/api/auth/login',",
+          "        method: 'POST',",
+          "        header: { 'Content-Type': 'application/json' },",
+          "        body: {",
+          "            mode: 'raw',",
+          "            raw: JSON.stringify({",
+          "                email: 'admin@proyection.com',",
+          "                password: 'password123'",
+          "            })",
+          "        }",
+          "    };",
+          "    ",
+          "    pm.sendRequest(loginRequest, function (err, response) {",
+          "        if (err) {",
+          "            console.error('❌ Error obteniendo token:', err);",
+          "            return;",
+          "        }",
+          "        ",
+          "        if (response.code === 200) {",
+          "            const responseData = response.json();",
+          "            if (responseData.success && responseData.data.tokens) {",
+          "                pm.collectionVariables.set('authToken', responseData.data.tokens.accessToken);",
+          "                pm.collectionVariables.set('refreshToken', responseData.data.tokens.refreshToken);",
+          "                console.log('✅ Token actualizado automáticamente');",
+          "            }",
+          "        } else {",
+          "            console.error('❌ Login falló:', response.json());",
+          "        }",
+          "    });",
+          "}",
+          "",
+          "obtenerTokenAutomatico();"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "authToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "refreshToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "🔐 Authentication",
+      "item": [
+        {
+          "name": "🚪 Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// 🔄 Auto-save tokens",
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.success && response.data.tokens) {",
+                  "        pm.collectionVariables.set('authToken', response.data.tokens.accessToken);",
+                  "        pm.collectionVariables.set('refreshToken', response.data.tokens.refreshToken);",
+                  "        console.log('✅ Tokens guardados automáticamente!');",
+                  "    }",
+                  "}",
+                  "",
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response has tokens', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data.tokens).to.have.property('accessToken');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@proyection.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "description": "🔐 Autenticar usuario y obtener tokens JWT"
+          }
+        },
+        {
+          "name": "👤 Get Profile",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response has user data', function () {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data).to.have.property('user');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/profile",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "profile"]
+            },
+            "description": "👤 Obtener perfil del usuario autenticado (con auto-token)"
+          }
+        },
+        {
+          "name": "🔄 Refresh Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.success && response.data.accessToken) {",
+                  "        pm.collectionVariables.set('authToken', response.data.accessToken);",
+                  "        console.log('✅ Token renovado automáticamente!');",
+                  "    }",
+                  "}",
+                  "",
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/refresh",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "refresh"]
+            },
+            "description": "🔄 Renovar access token usando refresh token"
+          }
+        },
+        {
+          "name": "🚶‍♂️ Logout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "// 🗑️ Limpiar tokens después del logout",
+                  "if (pm.response.code === 200) {",
+                  "    pm.collectionVariables.set('authToken', '');",
+                  "    pm.collectionVariables.set('refreshToken', '');",
+                  "    console.log('🧹 Tokens limpiados después del logout');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "logout"]
+            },
+            "description": "🚶‍♂️ Cerrar sesión (con auto-token)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "🛠️ Utilities",
+      "item": [
+        {
+          "name": "🏦 Banks",
+          "item": [
+            {
+              "name": "📋 Get All Banks",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/banks?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "banks"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "country",
+                      "value": "CO",
+                      "disabled": true
+                    },
+                    {
+                      "key": "bankingType",
+                      "value": "commercial",
+                      "disabled": true
+                    },
+                    {
+                      "key": "popular",
+                      "value": "true",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "🏦 Obtener listado de todos los bancos con paginación y filtros"
+              }
+            },
+            {
+              "name": "🌍 Banks by Country",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/banks/country/CO",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "banks", "country", "CO"]
+                },
+                "description": "🌍 Obtener bancos de un país específico (Colombia)"
+              }
+            },
+            {
+              "name": "⭐ Popular Banks",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/banks/popular?limit=10",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "banks", "popular"],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "country",
+                      "value": "CO",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "⭐ Obtener bancos populares"
+              }
+            },
+            {
+              "name": "🔍 Search Banks",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/banks/search?q=bancolombia",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "banks", "search"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "bancolombia"
+                    },
+                    {
+                      "key": "country",
+                      "value": "CO",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "🔍 Buscar bancos por nombre o código"
+              }
+            },
+            {
+              "name": "📊 Bank Statistics",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/banks/stats",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "banks", "stats"]
+                },
+                "description": "📊 Obtener estadísticas de bancos"
+              }
+            }
+          ]
+        },
+        {
+          "name": "🌍 Countries",
+          "item": [
+            {
+              "name": "📋 Get All Countries",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/countries?page=1&limit=20",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "countries"],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "continent",
+                      "value": "SA",
+                      "disabled": true
+                    },
+                    {
+                      "key": "supported",
+                      "value": "true",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "🌍 Obtener listado de todos los países con paginación y filtros"
+              }
+            },
+            {
+              "name": "🌟 Supported Countries",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/countries/supported",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "countries", "supported"]
+                },
+                "description": "🌟 Obtener países soportados (Colombia, USA, España)"
+              }
+            },
+            {
+              "name": "🌎 Countries by Continent",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/countries/continent/SA",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "countries", "continent", "SA"]
+                },
+                "description": "🌎 Obtener países de un continente (SA=Sud América)"
+              }
+            },
+            {
+              "name": "🔍 Country by ISO Code",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/countries/CO",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "countries", "CO"]
+                },
+                "description": "🔍 Obtener información detallada de un país por código ISO"
+              }
+            },
+            {
+              "name": "🔍 Search Countries",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/countries/search?q=colombia",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "countries", "search"],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "colombia"
+                    },
+                    {
+                      "key": "continent",
+                      "value": "SA",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "🔍 Buscar países por nombre, código ISO o nombre nativo"
+              }
+            },
+            {
+              "name": "📊 Country Statistics",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/utilities/countries/stats",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "utilities", "countries", "stats"]
+                },
+                "description": "📊 Obtener estadísticas de países"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "🏥 Health Check",
+      "item": [
+        {
+          "name": "📊 Server Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "description": "🏥 Verificar estado del servidor"
+          }
+        },
+        {
+          "name": "🏠 API Root",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            },
+            "description": "🏠 Información básica de la API"
+          }
+        }
+      ]
+    }
+  ]
+}
