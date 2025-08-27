@@ -73,12 +73,3 @@ Este proyecto tiene un archivo de instrucciones dedicado:
 5. Implementar endpoints base y pantallas de cuentas/gastos.
 
 ---
-
-
-## ✍️ Nuevo archivo
-
-Siempre que se incie un nuevo archivo se debe incluir esta línea:
-
-[// Instrucciones para Copilot: seguir prompt_func.md]
-
-> **Nota:** Copilot siempre debe poner esta línea cuando cree un nuevo archivo ademas de incluir documentación estandar de cada metodo y clase que se cree
