@@ -34,12 +34,10 @@ const bankSchema = new mongoose.Schema({
   },
   
   // 🌍 Ubicación
-  countryCode: {
-    type: String,
-    required: [true, 'El código de país es requerido'],
-    uppercase: true,
-    length: [2, 'El código de país debe tener exactamente 2 caracteres'],
-    match: [/^[A-Z]{2}$/, 'El código de país debe ser ISO 3166-1 alpha-2']
+  countryId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Country',
+    required: [true, 'El ID del país es requerido']
   },
   
   // 📞 Información de Contacto

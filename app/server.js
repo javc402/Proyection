@@ -55,6 +55,10 @@ app.use('/api/auth', authRoutes);
 const utilitiesRoutes = require('./routes/utilities');
 app.use('/api/utilities', utilitiesRoutes);
 
+// 💳 Management routes
+const managementRoutes = require('./routes/management');
+app.use('/api/management', managementRoutes);
+
 // 🩺 Health check endpoint
 app.get('/health', (req, res) => {
   res.json({
