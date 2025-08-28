@@ -73,3 +73,45 @@ Este proyecto tiene un archivo de instrucciones dedicado:
 5. Implementar endpoints base y pantallas de cuentas/gastos.
 
 ---
+
+## 📋 Archivos del Proyecto
+
+### 🎯 Controllers
+
+#### Authentication
+- **`app/controllers/authController.js`** - Control de autenticación de usuarios (registro, login, perfil)
+
+#### Utilities
+- **`app/controllers/utilities/bankController.js`** - Obtener información de bancos por país
+- **`app/controllers/utilities/countryController.js`** - Obtener información de países
+
+#### Management
+- **`app/controllers/management/bankAccountController.js`** - Gestión de cuentas bancarias de usuarios (CRUD, activar/desactivar, borrado lógico)
+
+### 🎯 Models
+
+#### Core Models
+- **`app/models/User.js`** - Modelo de usuario con validaciones de email y contraseña
+- **`app/models/Country.js`** - Modelo de países con códigos ISO y información geográfica
+- **`app/models/Bank.js`** - Modelo de bancos con información por país
+- **`app/models/BankAccount.js`** - Modelo de cuentas bancarias de usuarios con borrado lógico
+
+### 🎯 Routes
+- **`app/routes/auth.js`** - Rutas de autenticación
+- **`app/routes/utilities.js`** - Rutas de utilidades (países y bancos)
+- **`app/routes/management.js`** - Rutas de gestión de cuentas bancarias
+
+### 🎯 Configuration & Utils
+- **`app/config/database.js`** - Configuración de conexión a MongoDB
+- **`app/config/jwt.js`** - Configuración de JWT
+- **`app/middleware/auth.js`** - Middleware de autenticación
+- **`app/utils/jwt.js`** - Utilidades para manejo de JWT
+- **`app/utils/logger.js`** - Sistema de logging
+- **`app/utils/seed.js`** - Seed de datos iniciales
+
+### 🎯 Data & Testing
+- **`app/data/`** - Archivos JSON con datos iniciales de países, bancos y usuarios
+- **`app/postman/`** - Colección de Postman actualizada con todos los endpoints
+- **`app/tests/`** - Pruebas unitarias y de integración
+
+---
